@@ -6,6 +6,8 @@ import google.generativeai as genai
 import PIL.Image
 from dotenv import load_dotenv  
 # from google import genai
+from flask_cors import CORS
+CORS(app)
 
 import requests
 
