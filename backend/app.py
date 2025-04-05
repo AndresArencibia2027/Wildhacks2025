@@ -1,14 +1,14 @@
 import os
-import warnings
-import sys
-# import tempfile
+import tempfile
 from flask import Flask, render_template, request, jsonify
 import cv2
-# from google import genai
 import google.generativeai as genai
 import PIL.Image
 from dotenv import load_dotenv  
 from IPython.display import Markdown, clear_output, display, ipd
+# from google import genai
+from flask_cors import CORS
+CORS(app)
 
 import pandas as pd
 import numpy as np
