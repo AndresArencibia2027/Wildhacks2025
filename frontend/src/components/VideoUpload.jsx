@@ -65,7 +65,7 @@ const VideoUpload = () => {
       <div className="spacer"></div>
       <button
         onClick={handleUpload}
-        className="confirm-upload-btn"
+        className="confirm-upload-btn mt-4"
       >
         Confirm Upload
       </button>

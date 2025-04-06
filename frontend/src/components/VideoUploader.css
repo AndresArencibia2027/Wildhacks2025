@@ -46,6 +46,11 @@
     transition: background-color 0.3s ease; 
 }
 
+.confirm-upload-btn:hover {
+    background-color: rgb(156, 41, 41);
+    /* Darker shade for hover */
+}
+
   /* For file input */
   input[type="file"] {
       display: none;
