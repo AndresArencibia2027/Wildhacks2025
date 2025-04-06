@@ -5,8 +5,7 @@
     width: 100%;
     height: 284px;
     max-width: 600px;
-    margin: 50px auto;
-    background-color: rgba(182, 67, 25, 0.677); /* Button color */
+    background-color: rgba(212, 212, 212, 0.517); /* Button color */
     color: white;
     font-size: 20px; /* Bigger text */
     font-weight: bold;
@@ -23,10 +22,15 @@
       /* Darker shade for hover */
   }
 
+  .upload-icon {
+    width: 24px;
+    height: 24px;
+  }
+
   .confirm-upload-btn {
     display: block;
-    width: 100%;
-    height: 100px;
+    width: 50%;
+    height: 50px;
     max-width: 600px;
     margin: 50px auto;
     background-color: rgba(182, 67, 25, 0.677); /* Button color */

@@ -50,7 +50,11 @@ const VideoUpload = () => {
         onClick={() => document.getElementById('file-input').click()} 
         className="upload-btn"
       >
-        Choose File
+       <img
+          src="../assets/upload.jpg" 
+          alt="Upload"
+          className="upload-icon"
+        />
       </button>
 
       <p>{status}</p>
@@ -61,7 +65,7 @@ const VideoUpload = () => {
         onClick={handleUpload}
         className="confirm-upload-btn"
       >
-        Upload Selected File
+        Confirm upload
       </button>
 
 
