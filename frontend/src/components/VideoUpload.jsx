@@ -16,7 +16,7 @@ const VideoUpload = () => {
 
   const handleUpload = async () => {
     if (!file) {
-      setStatus("Please select a video first.");
+      setStatus("Please upload a video first.");
       return;
     }
     

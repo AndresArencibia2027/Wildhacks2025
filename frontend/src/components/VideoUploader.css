@@ -29,7 +29,7 @@
 
   .confirm-upload-btn {
     display: block;
-    width: 50%;
+    width: 100%;
     height: 50px;
     max-width: 600px;
     background-color: rgba(182, 67, 25, 0.677); /* Button color */
