@@ -32,14 +32,11 @@ export const HeroSection = () => {
   return (
     <section className="hero-section">
       <article className="hero-text">
-        <h2>Beehive management simplified 🐝🍯</h2>
+        <h2>Beehive Management Simplified 🐝🍯</h2>
         <p>
-          Our tool will automatically analyze a video of your beehive, examine
-          your video for information on your bees, generate a detailed report of
-          the status of your hive, and provide you with necessary to-do list
-          items.
+        Powered by AI, BeeHacks analyzes video footage of your bees and detects any potential agitation, 
+        generates a detailed report on the status of your hive, and summarizes any potential next steps. 
         </p>
-
         <div className="flex flex-col items-center max-w-2xl w-full">
         <h3 className="text-2xl font-semibold text-black leading-[76.8px] max-md:text-5xl max-sm:text-4xl">
             Upload a video of your beehive to get started!

@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './VideoUploader.css'
+import uploadImage from "../assets/upload.png"; 
+
 
 const VideoUpload = () => {
   const [file, setFile] = useState(null);
@@ -14,7 +16,7 @@ const VideoUpload = () => {
 
   const handleUpload = async () => {
     if (!file) {
-      setStatus("Please select a video first.");
+      setStatus("Please upload a video first.");
       return;
     }
     
@@ -50,7 +52,11 @@ const VideoUpload = () => {
         onClick={() => document.getElementById('file-input').click()} 
         className="upload-btn"
       >
-        Choose File
+       <img
+          src= {uploadImage}
+          alt="Upload"
+          className="upload-icon"
+        />
       </button>
 
       <p>{status}</p>
@@ -59,9 +65,9 @@ const VideoUpload = () => {
       <div className="spacer"></div>
       <button
         onClick={handleUpload}
-        className="upload-btn mt-4"
+        className="confirm-upload-btn mt-4"
       >
-        Upload Selected File
+        Confirm Upload
       </button>
 
 
