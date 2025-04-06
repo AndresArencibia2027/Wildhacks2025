@@ -5,18 +5,14 @@ import tempfile
 from flask import Flask, render_template, request, jsonify
 import cv2
 import google.generativeai as genai
-import PIL.Image
 from dotenv import load_dotenv  
 from IPython.display import Markdown, clear_output, display
 from tqdm import tqdm
 from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type
 import requests
+
 from flask_cors import CORS
 CORS(app)
-
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
 
 def suppress_httpx_closed_warning():
     warnings.filterwarnings("ignore", message="Exception ignored in.*__del__")
@@ -155,38 +151,39 @@ def generate_summary_report(analyses):
     response = model.generate_content(summary_prompt)
     return response.text
 
-def main(video_path):
-    video = cv2.VideoCapture(video_path)
-    n_frames = int(video.get(cv2.CAP_PROP_FRAME_COUNT)) 
-    print(f"Total frames: {n_frames}")
-    height = video.get(cv2.CAP_PROP_FRAME_HEIGHT)
-    width = video.get(cv2.CAP_PROP_FRAME_WIDTH)
-    print(f'Height {height}, Width {width}')
-    # Get frames per second
+@app.route('/upload', methods=['POST'])
+def upload_video():
+    if 'video' not in request.files:
+        return jsonify({"error": "No video file provided"}), 400
+    file = request.files['video']
+    if file.filename == "":
+        return jsonify({"error": "No selected file"}), 400
+
+    temp_dir = tempfile.gettempdir()
+    file_path = os.path.join(temp_dir, file.filename)
+    file.save(file_path)
+
+    video = cv2.VideoCapture(file_path)
+    if not video.isOpened():
+        return jsonify({"error": "Could not open video file"}), 500
+
+    n_frames = int(video.get(cv2.CAP_PROP_FRAME_COUNT))
     fps = round(video.get(cv2.CAP_PROP_FPS))
-    print(f'FPS : {fps:0.2f}')
 
-    per_sec = extract_key_frames(video_path, fps, n_frames)
-    print("There are", len(per_sec), "frames selected so far.")
-
-    noteworthy_frames = extract_noteworthy_frames(video_path, per_sec, output_directory, threshold)
-    print(f'Total noteworthy frames based on the threshold chosen : {len(noteworthy_frames)}')
-
-    print("Analyzing bee behavior...")
+    per_sec = extract_key_frames(file_path, fps, n_frames)
+    noteworthy_frames = extract_noteworthy_frames(file_path, per_sec, output_directory, threshold)
     analyses = analyze_bee_agitation(noteworthy_frames)
-    
+
     if analyses != 0:
-        print("Generating summary report...")
         report = generate_summary_report(analyses)
-    
-        print("\n=== BEE AGITATION ANALYSIS REPORT ===")
-        print(report)
+        return jsonify({"report": report})
     else:
-        print("No noteworthy frames chosen.")
+        return jsonify({"message": "No noteworthy frames chosen."})
+
+@app.route('/')
+
+def index():
+    return "Flask backend is running! Use /upload to post a video file."
 
 if __name__ == "__main__":
-    video_path = input("Enter path to your bee video file: ")
-    if not os.path.exists(video_path):
-        print("Error: File not found")
-    else:
-        main(video_path)
+    app.run(debug=True, host='0.0.0.0')
