@@ -14,7 +14,6 @@ return (
     <Header />
         <main className="flex flex-col px-20 max-md:px-10 max-sm:px-5">
         <HeroSection />
-        <VideoUpload />
         </main>
     </div>
     );

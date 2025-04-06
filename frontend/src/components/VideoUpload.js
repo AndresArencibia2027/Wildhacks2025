@@ -30,6 +30,9 @@ const VideoUpload = () => {
   return (
     <section className="flex flex-col justify-center items-center p-20 mt-20 w-full rounded-lg bg-zinc-100 max-md:p-10 max-sm:p-5">
       <div className="flex flex-col items-center max-w-2xl w-full">
+        <h2 className="text-2xl font-semibold text-black leading-[76.8px] max-md:text-5xl max-sm:text-4xl">
+            Upload a video of your beehive to get started!
+        </h2>
         <img
           src="https://cdn.builder.io/api/v1/image/assets/TEMP/070a0b1ad689c950c95ac1ffa5ef3bb1d820f97b"
           alt="Upload icon"
