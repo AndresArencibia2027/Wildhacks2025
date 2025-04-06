@@ -2,7 +2,8 @@
 /* Style for the Choose File and Upload buttons */
 .upload-btn {
     display: block;
-    width: 90%;
+    width: 100%;
+    height: 284px;
     max-width: 600px;
     margin: 50px auto;
     background-color: rgba(182, 67, 25, 0.677); /* Button color */
@@ -21,6 +22,25 @@
       background-color: rgb(153, 51, 13);
       /* Darker shade for hover */
   }
+
+  .confirm-upload-btn {
+    display: block;
+    width: 100%;
+    height: 100px;
+    max-width: 600px;
+    margin: 50px auto;
+    background-color: rgba(182, 67, 25, 0.677); /* Button color */
+    color: white;
+    font-size: 20px; /* Bigger text */
+    font-weight: bold;
+    text-align: center;
+    padding: 80px 20px; /* Bigger button size */
+    border-radius: 12px; /* Rounded corners */
+    border: 2px solid #ccc;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: background-color 0.3s ease-in-out; /* Smooth transition on hover */
+}
 
   /* For file input */
   input[type="file"] {
