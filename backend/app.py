@@ -11,8 +11,8 @@ from IPython.display import Markdown, clear_output, display
 from tqdm import tqdm
 from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type
 import requests
-# from flask_cors import CORS
-# CORS(app)
+from flask_cors import CORS
+CORS(app)
 
 import pandas as pd
 import numpy as np
