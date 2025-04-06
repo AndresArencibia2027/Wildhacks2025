@@ -12,6 +12,7 @@ from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_excep
 import requests
 
 from flask_cors import CORS
+app = Flask(__name__)
 CORS(app)
 
 def suppress_httpx_closed_warning():
