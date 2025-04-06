@@ -2,12 +2,11 @@
     "name": "wildhacks2025",
     "version": "1.0.0",
     "scripts": {
-      "start": "concurrently \"npm run start:backend\" \"npm run start:frontend\"",
-      "start:backend": "python backend/app.py",
-      "start:frontend": "npm --prefix frontend start"
+        "start": "concurrently \"npm run start:backend\" \"npm run start:frontend\"",
+        "start:backend": "python backend/app.py",
+        "start:frontend": "npm --prefix frontend start"
     },
     "devDependencies": {
-      "concurrently": "^7.0.0"
+        "concurrently": "^7.6.0"
     }
-  }
-  
+}

@@ -10,12 +10,15 @@ import "./Home.css";
 
 const Home = () => {
 return (
-    <div className="flex flex-col bg-white min-h-[screen]">
-    <Header />
-        <main className="flex flex-col px-20 max-md:px-10 max-sm:px-5">
+    <div className="flex flex-col bg-white min-h-[screen]">x
+    <main className="flex flex-col px-20 max-md:px-10 max-sm:px-5">
         <HeroSection />
         </main>
+    <div style ={{display: 'flex', justifyContent:'flex-end'}}>
+        <Header />
     </div>
+    </div>
+
     );
 };
 
