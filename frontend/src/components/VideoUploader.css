@@ -35,15 +35,15 @@
     margin: 50px auto;
     background-color: rgba(182, 67, 25, 0.677); /* Button color */
     color: white;
-    font-size: 20px; /* Bigger text */
+    font-size: 15px; 
     font-weight: bold;
     text-align: center;
-    padding: 80px 20px; /* Bigger button size */
-    border-radius: 12px; /* Rounded corners */
-    border: 2px solid #ccc;
+    padding: 16px 40px;
+    border-radius: 999px; 
+    border: none;
     cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    transition: background-color 0.3s ease-in-out; /* Smooth transition on hover */
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    transition: background-color 0.3s ease; 
 }
 
   /* For file input */

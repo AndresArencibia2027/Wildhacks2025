@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './VideoUploader.css'
+import uploadImage from "../assets/upload.png"; 
+
 
 const VideoUpload = () => {
   const [file, setFile] = useState(null);
@@ -51,7 +53,7 @@ const VideoUpload = () => {
         className="upload-btn"
       >
        <img
-          src="../assets/upload.jpg" 
+          src= {uploadImage}
           alt="Upload"
           className="upload-icon"
         />
@@ -65,7 +67,7 @@ const VideoUpload = () => {
         onClick={handleUpload}
         className="confirm-upload-btn"
       >
-        Confirm upload
+        Confirm Upload
       </button>
 
 
