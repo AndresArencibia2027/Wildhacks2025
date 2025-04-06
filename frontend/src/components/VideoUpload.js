@@ -1,29 +1,37 @@
-// src/components/VideoUpload.js
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const VideoUpload = () => {
   const [file, setFile] = useState(null);
   const [status, setStatus] = useState("");
+  const navigate = useNavigate();
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
   };
 
   const handleUpload = async () => {
-    if (!file) return;
+    if (!file) {
+      setStatus("Please select a video first.");
+      return;
+    }
+    
     const formData = new FormData();
     formData.append("video", file);
+
     try {
       setStatus("Uploading...");
-      const response = await axios.post("http://localhost:5000/", formData, {
+      const response = await axios.post("http://localhost:5000/upload", formData, {
         headers: { "Content-Type": "multipart/form-data" }
       });
+      console.log(response.data);
       setStatus("Upload complete! Redirecting to logs...");
-      window.location.href = "/logs";
+      // Navigate to Logs page, passing the backend response data as state
+      navigate("/logs", { state: response.data });
     } catch (err) {
-      console.error(err);
-      setStatus("Upload failed.");
+      console.error("Upload failed:", err);
+      setStatus(`Upload failed: ${err.response?.data?.error || err.message}`);
     }
   };
 
