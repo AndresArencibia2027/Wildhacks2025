@@ -10,6 +10,7 @@ from dotenv import load_dotenv
 from IPython.display import Markdown, clear_output, display
 from tqdm import tqdm
 from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type
+import requests
 # from flask_cors import CORS
 # CORS(app)
 
@@ -103,7 +104,9 @@ def analyze_bee_agitation(frames):
     Provide your assessment on a scale from 1 (calm) to 5 (highly agitated).
     Include specific visual evidence supporting your rating.
     """
-    
+    if frames == []:
+        return 0
+
     for i, frame in enumerate(frames):
         try:
             # Convert frame to bytes for Gemini
@@ -119,7 +122,7 @@ def analyze_bee_agitation(frames):
             @retry(
                 stop=stop_after_attempt(5),  # Limit retries
                 wait=wait_exponential(multiplier=1, max=10),  # Exponential backoff
-                retry=retry_if_exception_type((requests.exceptions.RequestException, genai.APIError))
+                retry=retry_if_exception_type((requests.exceptions.RequestException))
             )
             def make_request():
                 return model.generate_content([prompt, image_part])
@@ -138,7 +141,7 @@ def analyze_bee_agitation(frames):
 
 def generate_summary_report(analyses):
     """Generate a comprehensive summary of all analyses"""
-    summary_prompt = """
+    summary_prompt = f"""
     You are an expert apiarist analyzing bee behavior across multiple frames.
     Here are individual frame analyses:
     {analyses}
@@ -155,12 +158,12 @@ def generate_summary_report(analyses):
 def main(video_path):
     video = cv2.VideoCapture(video_path)
     n_frames = int(video.get(cv2.CAP_PROP_FRAME_COUNT)) 
-
+    print(f"Total frames: {n_frames}")
     height = video.get(cv2.CAP_PROP_FRAME_HEIGHT)
     width = video.get(cv2.CAP_PROP_FRAME_WIDTH)
     print(f'Height {height}, Width {width}')
     # Get frames per second
-    fps = video.get(cv2.CAP_PROP_FPS)
+    fps = round(video.get(cv2.CAP_PROP_FPS))
     print(f'FPS : {fps:0.2f}')
 
     per_sec = extract_key_frames(video_path, fps, n_frames)
@@ -172,24 +175,14 @@ def main(video_path):
     print("Analyzing bee behavior...")
     analyses = analyze_bee_agitation(noteworthy_frames)
     
-    print("Generating summary report...")
-    report = generate_summary_report(analyses)
+    if analyses != 0:
+        print("Generating summary report...")
+        report = generate_summary_report(analyses)
     
-    print("\n=== BEE AGITATION ANALYSIS REPORT ===")
-    print(report)
-    
-    # Save individual analyses
-    for analysis in analyses:
-        frame_num = analysis['frame_number']
-        with open(f"frame_{frame_num}_analysis.txt", "w") as f:
-            f.write(analysis['analysis'])
-        
-        # Save frame image
-        cv2.imwrite(
-            f"frame_{frame_num}.jpg",
-            cv2.cvtColor(analysis['image'], cv2.COLOR_RGB2BGR))
-    
-    print("Analysis saved to individual files")
+        print("\n=== BEE AGITATION ANALYSIS REPORT ===")
+        print(report)
+    else:
+        print("No noteworthy frames chosen.")
 
 if __name__ == "__main__":
     video_path = input("Enter path to your bee video file: ")
@@ -197,25 +190,3 @@ if __name__ == "__main__":
         print("Error: File not found")
     else:
         main(video_path)
-
-# try:
-#     response = client.models.generate_content(
-#         model="gemini-2.0-flash", contents="Explain how AI works in a few words"
-#     )
-#     print(response.text)
-# except Exception as e:
-#     print(f"An error occurred: {e}")
-
-# prompt = 'Is there a Queen Bee in this image?'
-# img = PIL.Image.open('sample_bee/bee_hive2.jpg')
-
-# model = genai.GenerativeModel(model_name='gemini-1.5-flash')  # or gemini-1.5-pro
-# response = model.generate_content([prompt, img], stream=True)
-
-# buffer = []
-# for chunk in response:
-#     for part in chunk.parts:
-#         buffer.append(part.text)
-
-#     # Simply print the buffer each time
-#     print(''.join(buffer))
