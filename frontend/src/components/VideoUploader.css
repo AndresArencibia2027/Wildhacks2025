@@ -1,13 +1,20 @@
 
 /* Style for the Choose File and Upload buttons */
 .upload-btn {
-    background-color: rgb(82, 24, 3); /* Button color */
+    display: block;
+    width: 90%;
+    max-width: 600px;
+    margin: 50px auto;
+    background-color: rgba(182, 67, 25, 0.677); /* Button color */
     color: white;
-    font-size: 18px; /* Bigger text */
-    padding: 12px 24px; /* Bigger button size */
+    font-size: 20px; /* Bigger text */
+    font-weight: bold;
+    text-align: center;
+    padding: 80px 20px; /* Bigger button size */
     border-radius: 8px; /* Rounded corners */
-    border: none;
+    border: 2px solid #ccc;
     cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     transition: background-color 0.3s ease-in-out; /* Smooth transition on hover */
 }
   .upload-btn:hover {
