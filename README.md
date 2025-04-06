@@ -1,5 +1,4 @@
-# Wildhacks2025
+# WildHacks2025
 
-# This is the first edit. Testing editing rights and upload.
-
-# meow this is the second edit :))))))
+## Link to site (please zoom out to 75%):
+https://wildhacks2025-rlgv.vercel.app/
